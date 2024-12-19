@@ -1,0 +1,31 @@
+<!-- ver_producto.html -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ producto['nombre'] }}</title>
+</head>
+<body>
+    <h1>{{ producto['nombre'] }}</h1>
+    <p>{{ producto['descripcion'] }}</p>
+    <p>Precio: ${{ producto['precio'] }}</p>
+
+    <h3>Imágenes</h3>
+    {% if producto['imagenes'] %}
+        {% set imagenes = producto['imagenes'] | from_json %}
+        <div>
+            {% for imagen in imagenes %}
+                <img src="{{ url_for('static', filename=imagen.split('static/')[1]) }}" alt="Imagen del producto" width="300">
+            {% endfor %}
+        </div>
+    {% else %}
+        <p>No hay imágenes disponibles.</p>
+    {% endif %}
+
+    <!-- Botón para WhatsApp -->
+    <a href="https://wa.me/1139397431,%20Me%20interesa%20este%20producto:%20{{ producto.nombre }}" class="btn btn-success" target="_blank">
+
+    </a>
+</body>
+</html>
